@@ -1,0 +1,25 @@
+<ul>
+{% comment %}
+    {% for app in apps %}
+        {% if not app.is_fake_app %}
+            <li class="{{ app.name|slugify }}">
+                {% if True %}
+                    {% if not app.is_public %}
+                    <a href="#" class="app-modal" data-app="{{ app.name|slugify }}">{{ app|logo|safe }}</a>
+                    {% else %}
+                    <a href="{{ app.link }}">{{ app|logo|safe }}</a>
+                    {% endif %}
+                {% else %}
+                    {% if app.is_fake_app %}
+                        <a href="{{ app.link }}">{{ app|logo|safe }}</a>
+                    {% elif app.price > 0 and app.is_public %}
+                        <a href="#" data-reveal-id="subscribe-modal">{{ app|logo|safe }}</a>
+                    {% else %}
+                        <a href="#" data-reveal-id="{{ app.name|slugify }}-modal">{{ app|logo|safe }}</a>
+                    {% endif %}
+                {% endif %}
+            </li>
+        {% endif %}
+    {% endfor %}
+{% endcomment %}
+</ul>

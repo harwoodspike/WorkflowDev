@@ -1,0 +1,165 @@
+.dynamic-div { margin: 0; }
+
+{% if request.domain != None %}
+header .logo {
+	{% if request.domain.app_logo != None and request.domain.app_logo != '' %}
+	background-image: url({{ request.scheme }}://{{ request.get_host }}{{ request.domain.app_logo.url }});
+	{% elif request.domain.logo != None and request.domain.logo != '' %}
+	background-image: url({{ request.scheme }}://{{ request.get_host }}{{ request.domain.logo.url }});
+	{% else %}
+	background-image: url('/static/images/franbox-logo.png');
+	{% endif %}
+	{% if request.domain.app_logo_bg != '' %}
+	background-color: #{{ request.domain.app_logo_bg }};
+	{% elif request.domain.primary_color != '' %}
+	background-color: #{{ request.domain.primary_color }};
+	{% else %}
+	background-color: #FFFFFF;
+	{% endif %}
+}
+
+.miniForm > input[type="submit"], .miniForm > input[type="button"] { background-color: #{{ request.domain.primary_color }}; }
+.miniForm > input[type="submit"]:hover, .miniForm > input[type="button"]:hover { background-color: #{{ request.domain.secondary_color }}; }
+
+{% if request.domain.logo %}
+.logoPane {
+	background: #{{ request.domain.primary_color }} url({{ request.scheme }}://{{ request.get_host }}{{ request.domain.logo.url }}) no-repeat 50% 50%;
+	background-size: 250px;
+}
+.brand-footer {
+	background-image: url({{ request.scheme }}://{{ request.get_host }}{{ request.domain.logo.url }});
+	background-color: #{{ request.domain.app_logo_bg }};
+}
+{% endif %}
+
+{% if request.domain.login_bg != '' %}
+.contentCenterFormatter { background-color: #{{ request.domain.login_bg }}; }
+.orLine span { background-color: #{{ request.domain.login_bg }}; }
+{% endif %}
+
+.close-reveal-modal span.customize { font-size: 1.825rem; margin-top: 4px; color: #{{ request.domain.secondary_color }}; }
+.txtBlock * { color: #{{ request.domain.secondary_color }}; }
+div.success span.alert-icon { color: #{{ request.domain.primary_color }}; }
+img.greeting-logo { height: auto; max-width: 435px; }
+li svg:hover { fill: #{{ request.domain.primary_color }}; }
+.modal-actions a, .adminBlock a, .adminBlock a:link, .adminBlock a:visited, .adminBlock .linkStyle, .viewMorem { color: #{{ request.domain.secondary_color }}; }
+.fancyForm input[type="button"], .fancyForm input[type="submit"], .buttonStyle { background: #{{ request.domain.primary_color }}; }
+ul.errorlist li { background-color: #{{ request.domain.primary_color }}; }
+
+#progress-bar .progress-step.active { background-color: #{{ request.domain.primary_color }}; }
+#progress-bar .progress-step.active:after { border-left-color: #{{ request.domain.primary_color }}; }
+
+.sub-nav dt,
+.sub-nav dd,
+.sub-nav li { font-size: 13px; }
+.sub-nav dt.active a,
+.sub-nav dd.active a,
+.sub-nav li.active a { background-color: #{{ request.domain.primary_color }}; }
+.sub-nav dt.active a:hover,
+.sub-nav dd.active a:hover,
+.sub-nav li.active a:hover { background-color: #{{ request.domain.primary_color }}; opacity: 0.5; }
+
+.pagination .step-links span.current { background-color: #{{ request.domain.primary_color }}; }
+.bg-website { background-color: #{{ request.domain.primary_color }}; }
+#profileDrop a:hover, #settingDrop a:hover, #companyDrop a:hover { color: #{{ request.domain.primary_color }}; }
+.button.plan-btn { background-color: #{{ request.domain.primary_color }}; }
+.button.plan-btn:hover { background: #{{ request.domain.secondary_color }}; }
+a.orangeButton, button, input[type="button"], input[type="submit"], .buttonStyle { background: #{{ request.domain.primary_color }}; }
+a.orangeButton:hover, button:hover, input[type="button"]:hover, input[type="submit"]:hover, .buttonStyle:hover { background: #{{ request.domain.secondary_color }}; }
+
+a.add-button { color: #{{ request.domain.primary_color }}; }
+a.add-button:hover { color: #{{ request.domain.secondary_color }}; }
+a.back-to-dash:hover{ color: #{{ request.domain.primary_color }} !important; }
+div.progress > svg > g > path:first-of-type { fill: #{{ request.domain.primary_color }}; }
+
+.logo-wrapper,
+header .logo .mainNavArrow.arrow {
+	{% if request.domain.app_logo_bg != '' %}
+	background-color: #{{ request.domain.app_logo_bg }};
+	{% elif request.domain.primary_color != '' %}
+	background-color: #{{ request.domain.primary_color }};
+	{% else %}
+	background-color: #FFFFFF;
+	{% endif %}
+}
+#internalDrop a:hover { color: #{{ request.domain.primary_color }}; }
+header { border-bottom: 1px solid #{{ request.domain.secondary_color }}; }
+form.custom span.custom.checkbox { background-color: #{{ request.domain.primary_color }}; }
+
+.button.box-btn { background-color: #{{ request.domain.primary_color }}; }
+.button.box-btn:hover { background-color: #{{ request.domain.secondary_color }}; }
+form.custom .custom.dropdown { background: #{{ request.domain.secondary_color }} !important; }
+form.custom .custom.dropdown .selected, form.custom .custom.dropdown ul li:hover { background-color: #{{ request.domain.primary_color }} !important; }
+
+.user-limits { color: #{{ request.domain.secondary_color }}; }
+.options-right { border: solid 1px #{{ request.domain.primary_color }}; }
+.options-right a { color: #{{ request.domain.primary_color }}; }
+.dropdown .option:hover { color: #{{ request.domain.primary_color }}; }
+.bool-true { color: #{{ request.domain.primary_color }}; }
+header .button:hover,
+header form input[type="submit"]:hover { background-color: #{{ request.domain.primary_color }}; opacity: 0.5; }
+.supportInfoLine a { color: #{{ request.domain.primary_color }}; }
+header form .button{ background-color: #{{ request.domain.primary_color }}; }
+header .button, header .button:visited, header .button:active, header form input[type="submit"] {
+    background-color: #{{ request.domain.primary_color }};
+}
+
+.adminBlock .row.heading.headtop {
+	background-color: #{{ request.domain.primary_color }};
+}
+
+{% if request.domain.secondary_color == request.domain.primary_color %}
+.f-progress .meter { background: #{{ request.domain.secondary_color }}; color: #fff; }
+{% else %}
+.f-progress .meter { background: #{{ request.domain.secondary_color }}; color: #{{ request.domain.primary_color }}; }
+{% endif %}
+.f-progress { border-color: #{{ request.domain.secondary_color }}; padding: 0px; }
+.f-progress .meter { padding-top: 3px; }
+
+.adminBlock .apply-box h3:hover,
+	.adminBlock .wizard-box h3:hover,
+	.adminBlock .apply-box h4:hover,
+	.adminBlock .wizard-box h4:hover,
+	.adminBlock .apply-box h3 a:hover,
+	.adminBlock .wizard-box h3 a:hover,
+	.adminBlock .apply-box h4 a:hover,
+	.adminBlock .wizard-box h4 a:hover,
+	.adminBlock .apply-box .progress a:hover,
+	.adminBlock .wizard-box .progress a:hover,
+	.adminBlock .apply-box .progress span:hover,
+	.adminBlock .wizard-box .progress span:hover  {
+		color: #{{ request.domain.primary_color }};
+	}
+
+.adminBlock .edit, .adminBlock .date_trigger{ color: #{{ request.domain.primary_color }}; }
+.content-editor .icon-checkmark.green { color: #{{ request.domain.primary_color }}; }
+.span.prefix { background-color: #{{ request.domain.primary_color }} !important; }
+.mark-completed, .mark-current { color: #{{ request.domain.primary_color }}; }
+.cheatsheet li { color: #{{ request.domain.primary_color }}; }
+.aud-btns-container { background-color: #{{ request.domain.secondary_color }} !important; }
+
+.blue-header { background-color: #{{ request.domain.primary_color }}; }
+.blue_tag { color: #{{ request.domain.secondary_color }}; }
+span.prefix, label.prefix {
+	background-color: #{{ request.domain.primary_color }};
+	color: #FFFFFF;
+}
+
+.ui-widget-header { color: #{{ request.domain.primary_color }}; }
+.ui-widget-content { color: #{{ request.domain.primary_color }}; }
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+    border: 1px solid #{{ request.domain.secondary_color }};
+    background-color: #{{ request.domain.primary_color }};
+    color: #fff;
+}
+
+{% if request.domain.mobile_app_logo != None and request.domain.mobile_app_logo != '' %}
+@media (max-width: 640px) {
+	header .logo {
+		background-image: url({{ request.scheme }}://{{ request.get_host }}{{ request.domain.mobile_app_logo.url }});
+		background-position: 50% 50%;
+	}
+}
+{% endif %}
+
+{% endif %}

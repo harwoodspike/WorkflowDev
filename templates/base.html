@@ -1,0 +1,104 @@
+{% load webpack_loader %}<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="google" content="notranslate">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Project</title>
+
+    <script src="//use.typekit.net/lpi5pwf.js"></script>
+    <script>try{Typekit.load();}catch(e){}</script>
+
+    <link href="/static/styles/global.css" rel="stylesheet" type="text/css">
+    <link href="/static/styles/icofonts.css" media="screen, projector, print" rel="stylesheet" type="text/css">
+    <link href="/static/styles/foundation/app.css" media="screen, projector, print" rel="stylesheet" type="text/css">
+    <link href="/static/styles/global_reponsive.css" rel="stylesheet" type="text/css">
+    {% block section_styles %}{% endblock %}
+    {% block page_styles %}{% endblock %}
+    <link href="/dynamic.css" rel="stylesheet" type="text/css">
+  </head>
+
+  <body{% if dashboard %} class="dashboard"{% endif %}>
+    <div id="main-navigation" class="main-navigation">
+      {% include 'partials/main-navigation.html' %}
+    </div>
+
+    <header>
+      <div class="logo">
+        <a href="/"></a>
+      </div>
+
+      <div class="internalDropNavBtn">
+        <a class="mainNavArrow menuHandle trigger-main-nav">
+          <span class="icon-navicon"></span>
+        </a>
+      </div>
+
+      <div class="rightNav hide-for-small-down">
+        <div class="rightContainer">
+          <div class="navIcon-container">
+            <a class="navIcon settings menuHandle" data-dropdown="companyDrop" aria-controls="companyDrop" aria-expanded="false">
+              <span class="icon-settings"></span>
+              <span class="drop-text hide-for-smedium-down">Test Company</span>
+            </a>
+            <div id="companyDrop" data-dropdown-content class="f-dropdown drop-right set-width" aria-hidden="true" tabindex="-1">
+              {% include "partials/company-drop.html" %}
+            </div>
+          </div>
+
+          <div class="navIcon-container">
+            <a class="navIcon getSupport menuHandle" data-dropdown="supportDrop" aria-controls="supportDrop" aria-expanded="false">
+              <span class="icon-question"></span>
+            </a>
+            <div id="supportDrop" data-dropdown-content class="f-dropdown drop-right set-width" aria-hidden="true" tabindex="-1">
+              {% include "partials/support-drop.html" %}
+            </div>
+          </div>
+        </div>
+
+        <div class="leftContainer">
+          <a class="navIcon menuHandle" data-dropdown="profileDrop" aria-controls="profileDrop" aira-expaned="false">
+            <span id="profileImg">
+              <img src="https://app.franbox.com/static/images/no-profile-pic-thumb.jpg" class="userProfilePicThumb" alt="">
+            </span>
+            <span class="drop-text">Test User</span>
+          </a>
+          <div id="profileDrop" data-dropdown-content class="f-dropdown drop-right" aria-hidden="true" tabindex="-1">
+            {% include "partials/profile-drop.html" %}
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="sidebar{% if no_sidebar %} hide{% endif %}" id="main-nav">
+      {% block sidebar %}{% endblock %}
+      <div id="footer">
+        <div class="footerCopyright">&copy; <span class="curr-copyright-year"></span> ARC IP Inc. All Rights Reserved.</div>
+      </div>
+    </div>
+
+    <div class="bodyContent{% if no_sidebar %} no-sidebar{% endif %}">
+      <div class="bodyContentPadder">
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+
+    <script type="text/javascript" src="/static/js/foundation-5/vendor/modernizr.js"></script>
+    <script type="text/javascript" src="/static/js/foundation-5/vendor/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/foundation-5/foundation/foundation.js"></script>
+    <script type="text/javascript" src="/static/js/foundation-5/foundation/foundation.dropdown-modified.js"></script>
+    <script type="text/javascript" src="/static/js/foundation-5/foundation/foundation.reveal-modified.js"></script>
+    {% block main_scripts %}{% endblock %}
+    <script type="text/javascript" src="/static/js/fastclick/fastclick.js"></script>
+    <script type="text/javascript" src="/static/js/main-navigation.js"></script>
+    <script type="text/javascript" src="/static/js/global.js"></script>
+    <script type="text/javascript" src="/dynamic.js"></script>
+    <script type="text/javascript">
+      $(document).foundation();
+      window.addEventListener('load', function() {
+        FastClick.attach(document.body);
+      }, false);
+    </script>
+  </body>
+</html>

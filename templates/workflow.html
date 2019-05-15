@@ -1,0 +1,325 @@
+{% extends "base.html" %}
+{% load form_tags %}
+
+
+{% block page_styles %}
+<style media="screen">
+	.step-arrows { font-size: 25px; line-height: 70px; cursor: pointer; }
+	.workflow-nav { }
+	.workflow-nav .line { height: 5px; background-color: #D1D1D1; width: 100%; margin-top:35px; position: absolute; z-index: 1; }
+	.workflow-nav .workflow-nav-steps-container { overflow: hidden; }
+	.workflow-nav #workflow-nav-steps {display: flex; position: relative; z-index: 5; }
+	.workflow-nav .nav-step { text-align: center; flex: 0 0 {% divide 100 nav_show_steps %}%;  color: {{ request.domain.primary_color|color_variant:40 }}; }
+	.workflow-nav .nav-step a { font-weight: bold; font-size: 35px; display: inline-block; padding: 20px 0; background-color: {{ request.domain.primary_color|color_variant:40 }}; color: #fff !important; width: 50%; }
+	.workflow-nav .nav-step.active { color: #{{ request.domain.primary_color }}; }
+	.workflow-nav .nav-step.active a { background-color: #{{ request.domain.primary_color }}; }
+	.workflow-nav .nav-step.past { color: #D1D1D1; }
+	.workflow-nav .nav-step.past a { background-color: #D1D1D1; }
+	.workflow-nav .nav-step .step-title { margin-top: 10px; font-size: 14px; text-align: center; word-wrap: break-word; }
+
+	.content-area { margin-top: 123px; }
+	.content-area h2 { font-weight: lighter; font-size: 30px; color: #000; }
+	.content-area .step-description { color: #535353; padding-bottom: 40px; font-style: italic; }
+	.content-area .formRowLabel { font-weight: bold; }
+	.content-area .formRowValue { margin-bottom: 50px; }
+
+	.formRowValue ul { list-style-type: none; padding-left: 10px; padding-top: 10px; }
+	.formRowValue ul li { padding-bottom: 5px; }
+	.formRowValue input[type="text"],
+  .formRowValue input[type="email"],
+	.formRowValue input[type="number"] { background: transparent !important; border-bottom: 1px solid #000 !important; }
+  .formRowValue textarea { background: transparent !important; border: 1px solid #BABABA; -webkit-box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.31) !important; -moz-box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.31) !important; box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.31) !important; }
+	.buttonStyle.go-back { background-color: #CECECE; color: #000 !important; }
+	form.setupform.custom .custom.dropdown { background-color: #fff !important; border-bottom: 1px solid #000; }
+	form.setupform.custom .custom.dropdown a { color: #000 !important; }
+	form.setupform.custom .custom.dropdown .selector { background: transparent; font-size: 18px; line-height: 36px; }
+
+	input[type='number'] { -moz-appearance:textfield; }
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button { -webkit-appearance: none; }
+</style>
+{% if current_step.video != None %}
+<link rel="stylesheet" type="text/css" href="/static/styles/wistia/savavo-setup-left.css">
+{% endif %}
+{% if current_step.form_name != '' %}
+<script type="text/javascript" src="/django-admin/jsi18n/"></script>
+{{ form.media }}
+<style media="screen">
+	.prefix { height: 33px; line-height: 33px; }
+	input.currency { padding-right: 15px; }
+</style>
+{% endif %}
+{% endblock %}
+
+{% block page_scripts %}
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$('form.setupform.custom .custom.dropdown .selector').addClass('icon-angle-down');
+
+		$(".workflow-nav").each(function(){
+			var $carousel = $(this),
+				$carouselContainer = $carousel.find('.workflow-nav-steps-container'),
+				$carouselList = $carousel.find("#workflow-nav-steps"),
+				$carouselMockList = $carousel.find(".workflow-nav-steps-list"),
+				$carouselItem = $carousel.find(".nav-step"),
+				setItemWidth = function(){
+					step_width = (parseFloat(window.getComputedStyle($carousel.get(0)).width) / {{ nav_show_steps }}) + 'px';
+					$carouselItem.css('flex', '0 0 ' + step_width);
+					$carouselList.removeAttr("style");
+					var curWidth = parseFloat(window.getComputedStyle($carouselItem.get(0)).width) * (Math.ceil($carouselItem.length / {{ nav_show_steps }}) * {{ nav_show_steps }});
+					if (parseInt(curWidth % parseFloat(window.getComputedStyle($carousel.get(0)).width), 10) != 0){
+						curWidth = parseFloat(window.getComputedStyle($carousel.get(0)).width) * (Math.ceil($carouselItem.length / {{ nav_show_steps }}));
+					}
+					$carouselMockList.css("width", curWidth);
+				},
+				slide = function(dir){
+					if (!$carouselList.is(':animated')){
+						var moveto = 0,
+							curPos = parseFloat($carouselList.css("left")) || 0,
+							containerWidth = parseFloat(window.getComputedStyle($carouselContainer.get(0)).width),
+							listWidth = parseFloat(window.getComputedStyle($carouselMockList.get(0)).width),
+							before = (curPos + containerWidth).toFixed(3),
+							after = (listWidth + (curPos - containerWidth)).toFixed(3),
+							prevAfter = (listWidth - containerWidth) * -1;
+
+						if(dir=="next"){
+							moveto = (parseInt(after) < parseInt(containerWidth)) ? after : curPos - containerWidth;
+						} else {
+							moveto = (before > 0) ? prevAfter : curPos + containerWidth;
+						}
+						$carouselList.animate({ left: moveto });
+					}
+				};
+
+			$('.adminBlock').on('click', '.step-arrows', function(e){
+				e.preventDefault();
+				if ($(this).hasClass('icon-angle-right')){
+					slide('next');
+				} else {
+					slide('prev');
+				}
+			});
+
+			$(window).resize(function(){
+				setItemWidth();
+			});
+			setItemWidth();
+			if ({{ nav_start }} > 0){
+				$carouselList.css({ left: ({{ nav_start }} * parseFloat(window.getComputedStyle($carouselContainer.get(0)).width)) * -1 });
+			}
+		});
+	});
+	</script>
+
+	{% if current_step.agreement %}
+	{{ form.media }}
+	{% endif %}
+
+	{% if current_step.video != None %}
+	<script type="text/javascript" src="/static/js/wistia/playlist.js"></script>
+	<script async="" src="//fast.wistia.com/assets/external/E-v1.js" charset="ISO-8859-1"></script>
+	<script type="text/javascript">
+		var playlist = new WistiaPlaylist('video-player-content');
+		playlist.loadData({{ playlist|safe }});
+	</script>
+	{% endif %}
+
+	{% if current_step.form_name != '' %}
+	<script type="text/javascript" src="/static/js/js-webshim/minified/polyfiller.js"></script>
+	<script type="text/javascript">
+		// Webshims Code
+		webshims.setOptions('forms-ext', {
+			replaceUI: 'auto',
+			types: 'number'
+		});
+		webshims.polyfill('forms forms-ext');
+		// End Webshims Code
+	</script>
+{% endif %}
+
+	{% if current_step.form_name != '' or current_step.agreement %}
+	<script type="text/javascript">
+	$(document).on("click", ".save_btn", function(e){
+		e.preventDefault();
+		$('.setupform').trigger('submit');
+	});
+	</script>
+	{% endif %}
+{% endblock %}
+
+{% block content %}
+	<div class="adminBlock">
+		<div class="row collapse">
+			<div class="medium-24 column">
+				<h2 class="setting-header">{{ page_title }}</h2>
+			</div>
+		</div>
+
+		<div class="row collapse">
+			<div class="small-4 column center-text">
+				<span class="icon-angle-left step-arrows"></span>
+			</div>
+
+			<div class="small-16 column">
+				<div class="row collapse">
+					<div class="columns small-24">
+						<div class="workflow-nav">
+							<div class="line">&nbsp;</div>
+							<div class="workflow-nav-steps-container">
+								<div class="workflow-nav-steps-list"></div>
+								<div id="workflow-nav-steps">
+								{% for step in steps %}
+									<div class="nav-step{% if step_num == forloop.counter %} active{% elif step_num > forloop.counter %} past{% endif %}" data-step="{{ forloop.counter }}">
+										<a href="#"><span class="nav-step-num">{{ forloop.counter }}</span></a>
+										<div class="step-title">{{ step.name }}</div>
+									</div>
+								{% endfor %}
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="columns small-24 content-area">
+						<h2 class="step-title">{{ current_step.name }}</h2>
+						{% if uploads|length > 0 and current_step.employer %}
+						<div class="uploads">
+							<strong>Employee Uploads:</strong>
+							<ul>
+							{% for upload in uploads %}
+								<li><a href="{% url 'secure_upload_download' res_id=upload.id %}">{{ upload }}</a></li>
+							{% endfor %}
+							</ul>
+						</div>
+						{% endif %}
+
+						<form method="post" class="setupform custom no-width"{% if form.is_multipart %} enctype="multipart/form-data"{% endif %}>
+						<div class="row collapse">
+							<p class="columns step-description">{{ current_step.description|safe }}</p>
+						</div>
+
+						<div class="row collapse setup_step" data-step="{{ step_num }}">
+							<div class="columns" style="height: 100%;">
+
+								{% if current_step.upload.exists %}
+								<div class="uploads">
+									<strong>Downloads:</strong>
+									<ul>
+									{% for upload in current_step.upload.all %}
+										<li><a href="{% url 'secure_upload_download' res_id=upload.id %}">{{ upload }}</a></li>
+									{% endfor %}
+									</ul>
+								</div>
+								{% endif %}
+
+								{% if current_step.pdfgen.exists %}
+								<div class="uploads">
+									<strong>PDF Forms:</strong>
+									<ul>
+									{% for upload in current_step.pdfgen.all %}
+										<li><a href="#">{{ upload }}</a></li>
+									{% endfor %}
+									</ul>
+								</div>
+								{% endif %}
+
+								{% if current_step.form_name != '' or current_step.agreement != None %}
+									{% if form.errors %}
+									<div class="row collapse"><div class="column medium-12">
+										{% for key, value in form.errors.items %}
+										{{ value }}
+										{% endfor %}
+									</div></div>
+									{% endif %}
+									<div class="row collapse"><div class="column medium-12">
+									{% for field in form.visible_fields %}
+									{% if 'currency' in field.field.widget.attrs.class %}
+									<div class="formRow hide-inputbtns">
+										<div class="formRowLabel">{{ field.label|safe }}</div>
+										{% if field.errors %}{{ field.errors }}{% endif %}
+										<div class="formRowValue">
+											<div class="row collapse">
+												<div class="column small-2">
+													<span class="prefix">$</span>
+												</div>
+												<div class="column small-22">
+													<span>{{ field|tabindex:forloop.counter|disable_field:editable_step }}</span>
+												</div>
+											</div>
+										</div>
+										<div class="clear"></div>
+									</div>
+
+									{% else %}
+									<div class="formRow">
+										<div class="formRowLabel">{{ field.label|safe }}</div>
+										{% if field.errors %}{{ field.errors }}{% endif %}
+										<div class="formRowValue">{{ field|tabindex:forloop.counter|disable_field:editable_step }}</div>
+										<div class="clear"></div>
+									</div>
+									{% endif %}
+									{% endfor %}
+
+									{% for field in form.hidden_fields %}
+										{{ field }}
+									{% endfor %}
+									{% csrf_token %}
+									<input type="hidden" name="next_url" value="{{ next_url }}">
+									</div></div>
+								{% endif %}
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="columns">&nbsp;</div>
+						</div>
+
+						<div class="row collapse">
+							<div class="columns">
+								{% if step_num > 1 %}
+								<a href="#" class="buttonStyle go-back">&lt;&nbsp;Previous Step</a>
+								{% endif %}
+
+								{% if step_count > step_num %}
+								<a href="{{ next_url }}" class="buttonStyle save_btn">Continue to next step</a>
+								{% else %}
+								<a href="{{ next_url }}" class="buttonStyle save_btn">Save and Finish</a>
+								{% endif %}
+							</div>
+						</div>
+						</form>
+
+						{% if current_step.agreement %}
+						<div id="legal-modal" class="reveal-modal large" data-reveal>
+							<a class="close-reveal-modal">&#215;</a>
+							<div id="full-agreement">
+								<div id="agreement"></div>
+								<div class="signature-panel">
+									<div class="signature-pane row collapse">
+										<div class="column large-19">
+											<div id="signature"></div>
+											<div class="signee-name" data-user-id="{{ original_user.id }}">{{ original_user.get_full_name }}</div>
+										</div>
+										<div class="column large-5 hide-for-medium-down">
+											<div class="agreement-date">
+												<span class="date">Date: {% now "DATE_FORMAT" %}</span>
+											</div>
+										</div>
+									</div>
+									<div class="agreement-buttons">
+										<button id="save-sig" class="buttonStyle">Save Signature</button>
+										<a href="#" id="reset-sig">Reset Signature</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+
+			<div class="small-4 column center-text">
+				<span class="icon-angle-right step-arrows"></span>
+			</div>
+		</div>
+	</div>
+{% endblock %}

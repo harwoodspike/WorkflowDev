@@ -1,0 +1,371 @@
+@media (max-width: 1215px) {
+}
+/*
+##############################
+##		foundation Medium	##
+##############################
+*/
+@media (max-width: 1025px) {
+	/*
+		Medium Helpers
+	*/
+	.force-hide-for-medium-down { display: none;}
+
+	/*
+		Billing styles only
+	*/
+	td.stack-option {
+	  display: block;
+	  float: left;
+	}
+	td.stack-option:last-child {
+	  text-align: right!important;
+	}
+
+	/*
+		Header
+	*/
+	.rrTopBarContainer{height: 40px !important; z-index:5;}
+	.reveal-modal.full-under-header { top: 39px; height: calc(100% - 39px); min-height: calc(100% - 39px); }
+	header{	height: 41px; }
+	header .logo{ height: 40px; }
+	.dropdown{height:40px;}
+	.rightContainer.hide-for-medium-up{ height:40px;}
+	.dropdown .active_option{height:40px; line-height: 40px;}
+	.rightContainer.hide-for-medium-up span {
+		font-size: 24px !important;
+		line-height: 40px;
+	}
+	header .logo .mainNavArrow{ background-position: 50% 50%; }
+	header .internalDropNavBtn .mainNavArrow .icon-navicon { line-height: 40px; }
+	header .rightNav .leftContainer a[data-dropdown="profileDrop"]{height:40px;}
+	.settings{ height:39px; width: 190px; padding-left: 10px; }
+	.getSupport{ height:39px; width: 50px; }
+	.leftContainer, header .rightNav .leftContainer a[data-dropdown="profileDrop"] {height: 40px !important;}
+	.userName{padding:11px 16px 11px;}
+	header .rightNav .navIcon span{line-height: 40px; max-height: 40px; }
+	.rrTopBarContainer .icon-arrow-down.border-right{line-height: 40px;}
+
+	.jPanelMenu, body { overflow-x: hidden; }
+	#main-nav > ul.sidebarLinks { background: #666; height: 100%; }
+	.force-hide-for-medium-down{ display: none !important;}
+	.force-show-for-medium-down { display: block !important;}
+	header .rightNav { left: 230px; }
+	header .rightNav .leftContainer{ position: relative;}
+	header .app-alert{ top: 15px; left: 170px; min-width: 150px; margin: 0 auto 0 10px; }
+	.route-option.drop-title .option { text-align: left; }
+	.rrTopBar{
+		top: 40px !important;
+		height: 40px!important;
+		left: 0px !important;
+	}
+
+	/*
+		Navigation
+	*/
+	#main-nav{ background: #444; height: calc(100% - 40px); }
+	.jPanelMenu, body{ overflow-x: initial; }
+
+
+	header .logo{
+		width: 170px;
+		background-size: 70%;
+	}
+
+	header.no-sidebar .logo {
+	    background-position: calc(50% - 20px) 50%;
+	}
+
+	header .logo a{	width: 130px; }
+	.sidebar {
+		top: 40px;
+		left: -240px;
+		height: 0px;
+		display: none;
+		transition: all 0.15s ease-in-out;
+		-moz-transition: all 0.15s ease-in-out;
+		-webkit-transition: all 0.15s ease-in-out;
+	}
+	#mobileNav{	width: 220px !important; }
+
+	/*
+		Right nav
+	*/
+	.rightNav { left:120px; }
+	.rightNav-mobile {
+	  position: absolute !important;
+	  top: 0px;
+	  right: 0px;
+	  width:auto;
+	}
+
+
+	/*
+		Body Styles
+	*/
+	.bodyContent{ padding-left: 0px; padding-top: 40px;	}
+	.bodyContentPadder{ padding: 40px;}
+	.adminBlock { padding: 25px 10px !important; }
+	.jPanelMenu-panel{ overflow: hidden; width:100% !important; }
+	.bodyContent .mobile-aud .options-right { margin-left: 20px; max-width: calc(100% - 120px); position: absolute; }
+	/*.bodyContent .mobile-aud .options-right { top: 80px; right: 70px; }*/
+	/*.bodyContent .mobile-aud .options-right.floatLeft { top: 80px; right: 105px; }*/
+	.tile-text-bottom { height: 70px; }
+
+}
+
+/*
+##############################
+##		foundation Large	##
+##############################
+*/
+@media (max-width: 1440px) {
+
+}
+
+/*
+##############################
+##		foundation Small	##
+##############################
+*/
+@media (max-width: 640px) {
+	/*
+		helper classes
+	*/
+	.left-medium-up, .right-medium-up { float: none; }
+	.display-block-small { display: block }
+	.color-black{font-size: 13px!important;}
+
+	/*
+		Body Styles
+	*/
+	.bodyContent .bodyContentPadder{ padding: 45px 5px 5px !important; }
+	.adminBlock { padding: 8px 0px 0px !important; }
+	a.add-button{ top: 24px; }
+	.mobile-aud a.add-button{ top: -36px; }
+	.adminBlock{ margin: 10px 3%;}
+	.rrTopBar + .adminBlock{ margin-top: 0px !important;}
+	.dashboard .dash-col{ margin-bottom: 0px;}
+	.dashboard, .dashboard > .dataviewBlock { margin-top: 2px !important; }
+	.dataviewBlock{	padding: 0px; }
+	.mobile-aud .dropdown #audience { right: auto; }
+
+	.jPanelMenu-panel{
+		background: #C9C9C9 !important;
+	}
+
+	.dataview-divider {
+	  background: #fff;
+	  overflow: hidden;
+	  padding: 15px;
+	  margin:  10px 3%;
+	}
+	.dashboard .dataview-divider{
+		margin: 0px -5px 10px;
+	}
+	.bodyContent{
+		padding-top: 0px;
+		margin-top: -10px;
+		position: absolute;
+		width: 100%;
+	}
+	.alt {background:none;}
+	.force-show-for-small{display: block !important;}
+	.force-hide-for-small{display: none !important;}
+
+	.modal-600{width:calc(100% - 20px) !important; margin-left: 0px; left: 310px; }
+	.detail-modal div { margin: 10px 0px; }
+	.detail-modal .detail-title { font-weight: 800; }
+	.brand-footer{ display: block; position: absolute; bottom: 0px; left: 0px; right: 0px; }
+	.simple-title{display: block !important;}
+	.dropdown > div.datepicker{ width:100% !important;	}
+	.datePickerContainer {
+	  margin: 0px auto;
+	  overflow: auto;
+	  width: 397px;
+	}
+	div#date-range-picker >* {
+		font-size: 13px !important;
+	}
+	.dropdown .drop-title.drop-title:not(.multi-select-option){
+		padding: 0px 10px 8px 10px !important;
+		border-bottom: #DDD solid 1px !important;
+	}
+
+
+/*	.mobile-aud .options-right { position: relative; top: 18px !important; left: 28px; right: auto; }
+	.bodyContent .options-right { top: 80px; right: 35px; }*/
+	.bodyContent .mobile-aud .options-right { margin-left: 30px; position: relative; top: 20px; max-width: calc(100% - 60px); }
+
+	/*
+		Small Pretty Tables
+	*/
+	.pretty-form-table .label { display: block; border-right:none; min-width: 100%; }
+	.pretty-form-table .field { display: block; padding-left: 0px; min-width: 100%; }
+	.pretty-form-table .row, .pretty-form-table{ min-width: 0px; }
+	.formRow .pad-top{ padding-top: 10px; }
+
+	/*
+		Navigation
+	*/
+	#main-nav{ background: #333; height: calc(100% - 40px);	top: 40px; }
+	#platform-list .breadcrumbNavBars > li:nth-child(1) >  a, .breadcrumbNavBars > a:nth-child(1)  { background-color: #444; }
+	#platform-list .breadcrumbNavBars > li:nth-child(2) >  a, .breadcrumbNavBars > a:nth-child(2)  { background-color: #555; }
+	#platform-list .breadcrumbNavBars > li:nth-child(3) >  a, .breadcrumbNavBars > a:nth-child(3)  { background-color: #666; }
+	#platform-list .breadcrumbNavBars > li:nth-child(4) >  a, .breadcrumbNavBars > a:nth-child(4)  { background-color: #777; }
+	#platform-list .breadcrumbNavBars > li:nth-child(5) >  a, .breadcrumbNavBars > a:nth-child(5)  { background-color: #888; }
+	#platform-list .breadcrumbNavBars > li:nth-child(n+6)  >  a { background-color: #999; }
+	#platform-list .bodyContent > div:nth-of-type(2) {
+	  margin-top: 0px;
+	}
+	#platform-list .sidebarLinks { background-color: #989898 ;}
+	header .logo .mainNavArrow { background-position: 50% 55%; }
+
+	.logo { width:40px !important; }
+
+
+	/*
+		Header
+	*/
+	header .app-alert{ top: 45px; left: 0px; margin: 0 auto; text-align: center; min-width: 100%; }
+
+	/* body header .logo{
+  		background-position: 0% 50%;
+		background-size: 360%;
+	} */
+
+	header .logo a:nth-child(1) {width: 0px !important;}
+	.rrTopBarContainer .icon-arrow-down.border-right { line-height: 39px; }
+	.trend-picker-dropdown .icon-arrow-down.border-right{line-height: 39px;}
+	.dropdown .option_list{	width: 100% !important;	left: 0px; }
+	.dropdown.right .active_option {
+	  border: none;
+	  background: #FFF;
+	  height: 38px;
+	  line-height: 40px;
+	  float: none !important;
+	  width: 98% !important;
+	}
+	a.dropdown{ z-index: auto; }
+	.rrTopBarContainer{ z-index: 5;	height:auto !important; }
+	div.f-dropdown{ z-index:999; }
+	.rrTopBar {
+		position: relative !important;
+		background: none !important;
+		border: none !important;
+		border: 1px solid #DDD;
+		z-index: auto;
+		height: auto !important;
+		overflow: visible;
+		top: 0px !important;
+	}
+	.rrTopBar > :nth-child(1){ margin-top: 53px !important;}
+	.rrTopBar > :nth-last-child(1){ margin-bottom: 10px !important;}
+	.rrTopBar div.dropdown{
+		width: 94% !important;
+		float: none !important;
+		background: #fff;
+		text-align: right;
+		margin: 5px 3%;
+		height: 40px;
+		border: 1px solid #ddd;
+		z-index: auto;
+	}
+	.dropdown.left .active_option {
+	  height: 38px;
+	  line-height: 40px;
+	  width: 100% !important;
+	  border: none;
+	  font-size: 13px;
+	}
+}
+
+
+
+/*
+##############################
+##		 Small Devices 		##
+##############################
+*/
+@media (max-width: 767px) {
+
+	.adminBlock.profile-block {padding:40px 12px 0px 0px;}
+	.hide-for-smedium-down{
+		display: none !important;
+	}
+	.show-for-smedium-down{
+		display: block;
+	}
+
+}
+
+/*
+##############################
+##		Medium  Devices		##
+##############################
+*/
+
+@media (max-width: 1280px) {
+
+	.goal-table.prettyTable{
+		margin-top:0px;
+	}
+}
+
+/*
+############################
+		Special Sizes
+############################
+*/
+
+@media (max-width: 1600px) {
+
+}
+
+@media (max-width: 1280px) {
+
+}
+
+@media (max-width: 900px) {
+	.recentPages, .shortcutDrop, .notifDrop, .settings, .getSupport, .quickAdd { width:50px;}
+	.settings .drop-text { display: none; }
+}
+
+@media (max-width: 780px) {
+	.drop-title{ border:none; }
+
+
+	.force-show-for-smedium{display: block !important;}
+	.force-hide-for-smedium{display: none !important;}
+	th.force-show-for-smedium, td.force-show-for-smedium{ display: table-cell !important; }
+	tr.force-show-for-smedium{ display: table-row !important; }
+
+}
+
+@media (max-width: 480px){
+	.timer{width: 100%;}
+	div.datePickerContainer{display: block; overflow: auto; width: 197px;}
+	div.rrTopBar .dropdown div.hasDatepicker{
+		margin: 7px auto !important;
+		display: block !important;
+		width: 194px;
+		float: none!important;
+	}
+	#datePickerApply, #importRangeApply {
+	  float: right;
+	  display: block;
+	  text-align: center;
+	}
+	.dropdown > div.datepicker{
+		width: 100% !important;
+		height: 465px !important;
+		overflow: hidden;
+	}
+	#numberTable .numberTitle .label {
+		position: relative;
+		top: -10px;
+	}
+	.number-right {
+		float:initial;
+	}
+}

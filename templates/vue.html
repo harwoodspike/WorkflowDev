@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load webpack_loader %}
+
+{% block content %}
+  <div id="app"></div>
+{% endblock %}
+
+{% block main_scripts %}
+  {% render_bundle 'app' 'js' 'DEFAULT' %}
+{% endblock %}

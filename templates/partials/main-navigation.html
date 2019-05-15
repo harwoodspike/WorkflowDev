@@ -1,0 +1,86 @@
+<div class="adminBlock dashboard-menu">
+	<div class="row collapse">
+		<h2>{{ my_apps_title }} <a href="#" class="add-new-user-app-button add-button"><span class="icon-plus"></span></a></h2>
+		{% for app in my_apps %}
+			<div class="medium-12 large-8 columns tile-margin end">
+				<div class="dashboard-tile">
+					{% if not app.link and app.alert_text %}
+						<a href="#" class="app-link app-modal" data-app="{{ app.name|slugify }}"></a>
+					{% elif app.is_public %}
+						<a href="#" class="app-link app-modal" data-app="{{ app.name|slugify }}"></a>
+					{% else %}
+						<a href="{{ app.link }}" class="app-link app_check"
+						   data-app="{{ app.name }}" data-has_login="{{ app.has_login }}" {{ app.link_target }}></a>
+					{% endif %}
+					<h2>{{ app.name }}</h2>
+					<div class="sub-title">{{ app.sub_title }}</div>
+
+					{% if app.show_image %}
+						<img class="app-image" src="{{ app.logosrc }}" alt="{{ app.name }}">
+					{% else %}
+						<span class="icon-cloud app-image"></span>
+					{% endif %}
+
+					<div class="tile-text-bottom">{{ app.desc }}</div>
+					<div class="editaction" data-id="{{ app.id }}" data-name="{{ app.name }}"
+						 data-link="{{ app.link }}" data-desc="{{ app.desc }}" data-new_tab="{{ app.new_tab }}"
+						 data-sub_title="{{ app.sub_title }}">
+						<span class="icon-gear"></span>
+					</div>
+				</div>
+			</div>
+
+		{% empty %}
+		<div class="medium-12 large-8 columns tile-margin end">
+			<div class="dashboard-tile">
+				<a href="#" class="app-link app_check add-new-user-app-button" data-app="{{ app.name }}" data-has_login="false"></a>
+				<h2>Your App Here</h2>
+				<div class="sub-title">- GOLD -</div>
+				<span class="icon-cloud-upload app-image"></span>
+				<div class="tile-text-bottom">Create your own custom app link and place them here.</div>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+
+	{% for category in app_categories %}
+	<div class="row collapse category-spacer">
+		<h2>{{ category.name }}</h2>
+		{% for app in category.apps %}
+			<div class="medium-12 large-8 columns tile-margin end">
+				<div class="dashboard-tile">
+						<div class="row collapse coming-soon-row">
+						{% if app.is_platinum %}
+							<img src="/static/images/platinum.svg" alt="Coming Soon" class="coming-soon">
+						{% endif %}
+						</div>
+
+					{% if not app.link or not app.is_public %}
+						<a href="#" class="app-link app-modal" data-app="{{ app.name|slugify }}"></a>
+					{% else %}
+						<a href="{{ app.link }}" class="app-link" {{ app.link_target }}></a>
+					{% endif %}
+					<h2>{{ app.name }}</h2>
+					<div class="sub-title">{{ app.sub_title }}</div>
+
+					{% if app.show_image %}
+						<img class="app-image" src="{{ app.logosrc }}" alt="{{ app.name }}">
+					{% else %}
+						<span class="icon-cloud app-image"></span>
+					{% endif %}
+					<div class="tile-text-bottom">{{ app.desc }}</div>
+				</div>
+			</div>
+
+			{% if not app.link and app.alert_text %}
+				<div id="{{ app.name|slugify }}-modal" class="reveal-modal small" data-reveal>
+					<a class="close-reveal-modal">&#215;</a>
+					<div>{{ app.alert_text|safe }}</div>
+				</div>
+			{% endif %}
+		{% endfor %}
+	</div>
+	{% endfor %}
+
+	<p class="attribution right">Some logos provided by <a href="https://clearbit.com/">clearbit.com</a></p>
+</div>
