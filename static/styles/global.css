@@ -1284,7 +1284,7 @@
 	text-rendering: optimizeLegibility;
 	line-height: 1.5;
 	}
-	a.orangeButton, button, input[type="button"], input[type="submit"], .buttonStyle { border:none; cursor:pointer; color:#FFF !important; font-size:15px; padding:8px 8px; background:#148F8E;
+	a.orangeButton, button, input[type="button"], input[type="submit"], .buttonStyle { border:none; cursor:pointer; color:#FFF !important; font-size:15px; padding:8px 8px; background:#0392c1;
 																		transition: background .2s ease-in-out;
 																		-moz-transition: background .2s ease-in-out;
 																		-webkit-transition: background .2s ease-in-out; }
@@ -1396,7 +1396,7 @@
 			.formRowValue textarea { height: 120px; }
 	}
 	.formrowValue-column .formRow{ width: calc(100% - 30px);}
-	.fancyForm input[type="button"], .fancyForm input[type="submit"], .buttonStyle { padding:8px 16px; background:#148F8E; color:#FFF !important; border:none; cursor:pointer; text-decoration: none;
+	.fancyForm input[type="button"], .fancyForm input[type="submit"], .buttonStyle { padding:8px 16px; background:#0392c1; color:#FFF !important; border:none; cursor:pointer; text-decoration: none;
 																						transition: all .2s ease-in-out;
 																						-moz-transition: all .2s ease-in-out;
 																						-webkit-transition: all .2s ease-in-out; }
@@ -2030,7 +2030,7 @@
 		max-width: inherit;
 	}
 	form.custom span.custom.checkbox {
-	  background-color: #148F8E;
+	  background-color: #0392c1;
 	  border: none;
 	}
 	form.custom span.custom.checkbox.checked:before {
@@ -2078,7 +2078,7 @@
 		line-height: 30px!important;
 	}
 	form.custom .custom.dropdown .selected, form.custom .custom.dropdown ul li:hover{
-		background: #148F8E !important;
+		background: #0392c1 !important;
 		color: #FFF !important;
 	}
 

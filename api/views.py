@@ -2,6 +2,9 @@
 from __future__ import unicode_literals
 
 from rest_framework import viewsets, response
+from rest_framework.decorators import action
+
+from app.models import WorkflowWizard
 
 
 # Create your views here.
@@ -14,7 +17,42 @@ class TestViewSet(viewsets.ViewSet):
 
 class WorkflowViewSet(viewsets.ViewSet):
     def list(self, request, **kwargs):
-        return response.Response([])
+        return response.Response(WorkflowWizard.objects.values())
+
+    @action(detail=True)
+    def get_step(self, request, pk, step=1):
+        data = {'success': False, 'msg': 'Workflow not found'}
+        try:
+            wf = WorkflowWizard.objects.get(id=pk, active=True)
+        except WorkflowWizard.DoesNotExist:
+            pass
+
+        else:
+            cur_step = int(step) - 1
+            if (cur_step + 1 <= wf.steps.count()):
+                wfs = wf.steps.filter(active=True)[cur_step]
+                data = {
+                    'workflow': wf.name,
+                    'step_name': wfs.name,
+                    'step_desc': wfs.description,
+                    'step_fields': None,
+                }
+
+                if wfs.form:
+                    field_list = []
+                    for field in wfs.form.fields.filter(active=True):
+                        field_list.append({
+                            'label': field.name,
+                            'name': field.name,
+                            'value': '',
+                            'type': field.field_type,
+                            'required': field.required,
+                        })
+                    data['step_fields'] = field_list
+        return response.Response(data)
+
+    def save(self, request, *args, **kwargs):
+        return response.Response({'success': True})
 
 
 class AppCategoryViewSet(viewsets.ViewSet):

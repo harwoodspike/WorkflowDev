@@ -4,3 +4,4 @@ djangorestframework==3.9.2
 pytz==2019.1
 requests==2.21.0
 pycrypto==2.6.1
+git+git://github.com/fle/django-jsignature@1.10#egg=django-jsignature

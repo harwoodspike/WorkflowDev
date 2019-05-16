@@ -17,15 +17,16 @@ from django.conf import settings
 from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
-from rest_framework import routers
 from app import views as app_views
 from api import views as api
+from api.utils import ApiRouter
 
 
 # THIS IS WHERE YOU DEFINE API VIEWS
-router = routers.DefaultRouter()
+router = ApiRouter()
 router.register(r'test', api.TestViewSet, 'user')
 router.register(r'app_list', api.AppCategoryViewSet, 'user')
+router.register(r'workflow', api.WorkflowViewSet, 'workflow')
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),

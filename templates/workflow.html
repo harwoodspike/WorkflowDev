@@ -37,8 +37,12 @@
 	input[type='number'] { -moz-appearance:textfield; }
 	input::-webkit-outer-spin-button,
 	input::-webkit-inner-spin-button { -webkit-appearance: none; }
+
+	a.buttonStyle { display: inline-block; }
+	.setup_step a.legal-link { text-decoration: underline; }
+	.uploads ul { margin-bottom: 30px; list-style-position: inside; }
 </style>
-{% if current_step.form_name != '' %}
+{% if current_step.form != None %}
 {{ form.media }}
 <style media="screen">
 	.prefix { height: 33px; line-height: 33px; }
@@ -108,19 +112,6 @@
 
 	{% if current_step.agreement %}
 	{{ form.media }}
-	{% endif %}
-
-	{% if current_step.form != None %}
-	<script type="text/javascript" src="/static/js/js-webshim/minified/polyfiller.js"></script>
-	<script type="text/javascript">
-		// Webshims Code
-		webshims.setOptions('forms-ext', {
-			replaceUI: 'auto',
-			types: 'number'
-		});
-		webshims.polyfill('forms forms-ext');
-		// End Webshims Code
-	</script>
 	{% endif %}
 
 	{% if current_step.form != None or current_step.agreement %}

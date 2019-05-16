@@ -86,10 +86,23 @@
       </div>
     </div>
 
+		{% if request.flash_alerts|length > 0 %}
+			<div class="reveal-modal tiny" id="flash-alert" data-reveal>
+				{% for modal in request.flash_alerts %}
+					<div class="alert-box {% if modal.type == 'success' %}success{% elif modal.type == 'error' %}error{% elif modal.type == 'info' %}info{% else %}empty{% endif %}">
+						<span class="alert-icon icon-{% if modal.type == 'success' %}check{% elif modal.type == 'error' %}close{% elif modal.type == 'info' %}info{% else%}empty{% endif %}"></span>
+
+						<div class="modalAlertContents">{{ modal.msg|safe }}</div>
+					</div>
+				{% endfor %}
+			</div>
+		{% endif %}
+
     <script type="text/javascript" src="/static/js/foundation-5/vendor/modernizr.js"></script>
     <script type="text/javascript" src="/static/js/foundation-5/foundation/foundation.js"></script>
     <script type="text/javascript" src="/static/js/foundation-5/foundation/foundation.dropdown-modified.js"></script>
     <script type="text/javascript" src="/static/js/foundation-5/foundation/foundation.reveal-modified.js"></script>
+    <script type="text/javascript" src="/static/js/foundation-5/foundation/foundation.forms.js"></script>
     {% block main_scripts %}{% endblock %}
     {% block page_scripts %}{% endblock %}
     <script type="text/javascript" src="/static/js/fastclick/fastclick.js"></script>
