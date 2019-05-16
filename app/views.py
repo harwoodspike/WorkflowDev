@@ -33,7 +33,7 @@ def dynamic_files(request, ftype):
 def workflow(request, wiz_id, step=1):
     context = {'setup_wiz_page': True, 'no_sidebar': False}
     setup_wizards = WorkflowWizard.objects.filter(id=wiz_id)
-    setup_wiz = setup_wizards.first()
+    setup_wiz = setup_wizards.last()
 
     # Redirect to dashboard if no setup wizards
     if setup_wiz is None:
@@ -59,19 +59,13 @@ def workflow(request, wiz_id, step=1):
 
         if context['step_count'] >= step:
             context['current_step'] = current_step = wiz_steps[step - 1]
-        else:
-            current_step = None
-
-        if step > context['step_count']:
-            return HttpResponseRedirect(reverse('dashboard'))
-
-        else:
             context['next_url'] = None
 
-        if current_step.video is not None:
-            context['playlist'] = json.dumps(current_step.video.get_playlist())
+        elif step > context['step_count']:
+            current_step = None
+            return HttpResponseRedirect(reverse('dashboard'))
 
-        elif current_step.agreement is not None:
+        if current_step.agreement is not None:
             # load_data = '%s:%s' % (str(setup_wiz.object_type), content_object.id)
             load_data = ''
             context['form'] = LegalAgreementForm(agreements=[(current_step.agreement, load_data)])
@@ -89,12 +83,12 @@ def workflow(request, wiz_id, step=1):
 
         elif current_step.form is not None:
             form_context = {}
-            context['form'] = current_step.form
+            context['form'] = get_form(current_step.form)
 
             if context.get('form') is not None:
                 if request.method == 'POST':
-                    if hasattr(context['form'], 'get_instance'):
-                        form_context['instance'] = context['form'].get_instance(odl)
+                    # if hasattr(context['form'], 'get_instance'):
+                    #     form_context['instance'] = context['form'].get_instance(odl)
                     form_context.update({'data': request.POST, 'files': request.FILES})
                     context['form'] = context['form'](**form_context)
 
@@ -125,4 +119,4 @@ def workflow(request, wiz_id, step=1):
 
                     form_context['initial'] = initial
                     context['form'] = context['form'](**form_context)
-    return render(request, 'workflow-wizard.html', context)
+    return render(request, 'workflow.html', context)

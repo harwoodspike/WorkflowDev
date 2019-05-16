@@ -256,6 +256,7 @@ class WorkflowWizardFormField(BaseModel):
     form = models.ForeignKey(WorkflowWizardForm, models.CASCADE, 'fields', default=None, null=True)
     name = models.CharField(max_length=200, default='')
     description = models.TextField(default='')
+    field_type = models.CharField(max_length=100, default=FIELD_TYPES[0][0], choices=FIELD_TYPES)
     active = models.BooleanField(default=False)
     deleted = models.BooleanField(default=False)
     required = models.BooleanField(default=False)

@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test Project</title>
 
+		<script type="text/javascript" src="/static/admin/js/vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.init.js"></script>
     <script src="//use.typekit.net/lpi5pwf.js"></script>
     <script>try{Typekit.load();}catch(e){}</script>
 
@@ -85,11 +87,11 @@
     </div>
 
     <script type="text/javascript" src="/static/js/foundation-5/vendor/modernizr.js"></script>
-    <script type="text/javascript" src="/static/js/foundation-5/vendor/jquery.js"></script>
     <script type="text/javascript" src="/static/js/foundation-5/foundation/foundation.js"></script>
     <script type="text/javascript" src="/static/js/foundation-5/foundation/foundation.dropdown-modified.js"></script>
     <script type="text/javascript" src="/static/js/foundation-5/foundation/foundation.reveal-modified.js"></script>
     {% block main_scripts %}{% endblock %}
+    {% block page_scripts %}{% endblock %}
     <script type="text/javascript" src="/static/js/fastclick/fastclick.js"></script>
     <script type="text/javascript" src="/static/js/main-navigation.js"></script>
     <script type="text/javascript" src="/static/js/global.js"></script>
