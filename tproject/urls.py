@@ -32,7 +32,7 @@ urlpatterns = [
     url(r'^api/', include(router.urls)),
     url(r'dynamic.(?P<ftype>(js|css))', app_views.dynamic_files, name="dynamic_files"),
     url(r'^workflow/(?P<wiz_id>[0-9]+)/step/(?P<step>[0-9]+)/$', app_views.workflow, name="workflow"),
-    url(r'^workflow/(?P<wiz_id>[0-9]+)/$', app_views.workflow, name="jobs_workflow"),
+    url(r'^workflow/(?P<wiz_id>[0-9]+)/$', app_views.workflow, name="workflow"),
     url(r'^$', app_views.redirectToVue, name="dashboard"),
 ]
 urlpatterns = list(urlpatterns) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

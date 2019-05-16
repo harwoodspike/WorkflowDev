@@ -209,13 +209,6 @@
 								{% endif %}
 
 								{% if current_step.form != None or current_step.agreement != None %}
-									{% if form.errors %}
-									<div class="row collapse"><div class="column medium-12">
-										{% for key, value in form.errors.items %}
-										{{ value }}
-										{% endfor %}
-									</div></div>
-									{% endif %}
 									<div class="row collapse"><div class="column medium-12">
 									{% for field in form.visible_fields %}
 									{% if 'currency' in field.field.widget.attrs.class %}

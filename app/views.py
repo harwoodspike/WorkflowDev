@@ -60,7 +60,9 @@ def workflow(request, wiz_id, step=1):
 
         if context['step_count'] >= step:
             context['current_step'] = current_step = wiz_steps[step - 1]
-            context['next_url'] = None
+            context['next_url'] = reverse(
+                'workflow',
+                kwargs={'wiz_id': setup_wiz.id, 'step': int(step) + 1})
 
         elif step > context['step_count']:
             current_step = None
@@ -94,8 +96,7 @@ def workflow(request, wiz_id, step=1):
                     context['form'] = context['form'](**form_context)
 
                     if not context.get('editable_step', False):
-                        return HttpResponseRedirect(
-                            request.POST.get('next_url', reverse('dashboard')))
+                        return HttpResponseRedirect(request.POST.get('next_url', reverse('dashboard')))
 
                     elif context['form'].is_valid():
                         form_save_context = {'request': request}
