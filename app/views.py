@@ -13,6 +13,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from app.forms import LegalAgreementForm
 from app.models import WorkflowWizard
+from app.utils import get_form
 
 
 # Create your views here.

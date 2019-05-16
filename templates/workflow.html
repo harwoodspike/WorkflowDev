@@ -209,15 +209,15 @@
 								{% endif %}
 
 								{% if current_step.form != None or current_step.agreement != None %}
-									{% comment %} {% if form.errors %}
+									{% if form.errors %}
 									<div class="row collapse"><div class="column medium-12">
 										{% for key, value in form.errors.items %}
 										{{ value }}
 										{% endfor %}
 									</div></div>
-									{% endif %}{% endcomment %}
+									{% endif %}
 									<div class="row collapse"><div class="column medium-12">
-									{% comment %}{% for field in form.visible_fields %}
+									{% for field in form.visible_fields %}
 									{% if 'currency' in field.field.widget.attrs.class %}
 									<div class="formRow hide-inputbtns">
 										<div class="formRowLabel">{{ field.label|safe }}</div>
@@ -248,7 +248,7 @@
 									{% for field in form.hidden_fields %}
 										{{ field }}
 									{% endfor %}
-									{% csrf_token %} {% endcomment %}
+									{% csrf_token %}
 									<input type="hidden" name="next_url" value="{{ next_url }}">
 									</div></div>
 								{% endif %}
@@ -262,14 +262,14 @@
 						<div class="row collapse">
 							<div class="columns">
 								{% if step_num > 1 %}
-								<a href="#" class="buttonStyle go-back">&lt;&nbsp;Previous Step</a>
+								<a href="{% url 'workflow' wiz_id=workflow_wiz.id step=step_num|add:-1 %}" class="buttonStyle go-back">
+									&lt;&nbsp;Previous Step
+								</a>
 								{% endif %}
 
-								{% if step_count > step_num %}
-								<a href="{{ next_url }}" class="buttonStyle save_btn">Continue to next step</a>
-								{% else %}
-								<a href="{{ next_url }}" class="buttonStyle save_btn">Save and Finish</a>
-								{% endif %}
+								<a href="{% url 'workflow' wiz_id=workflow_wiz.id step=step_num|add:1 %}" class="buttonStyle save_btn">
+								{% if step_count > step_num %}Continue to next step{% else %}Save and Finish{% endif %}
+								</a>
 							</div>
 						</div>
 						</form>

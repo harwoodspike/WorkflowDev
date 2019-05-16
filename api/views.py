@@ -12,6 +12,11 @@ class TestViewSet(viewsets.ViewSet):
         })
 
 
+class WorkflowViewSet(viewsets.ViewSet):
+    def list(self, request, **kwargs):
+        return response.Response([])
+
+
 class AppCategoryViewSet(viewsets.ViewSet):
     def list(self, request, **kwargs):
         return response.Response({
