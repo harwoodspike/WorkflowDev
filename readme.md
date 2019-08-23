@@ -33,3 +33,6 @@
 In this project we are merely trying to convert our current workflow system into vuejs.
 We would like the new system to look like the current but instead of being integrated into django we
 will use the new apis I have created in this project to populate the vusjs interface.
+
+![screenshot step 1 example](https://drive.google.com/open?id=1PsfG4LdY8Is1MJUoltP8c7BFWixW9AUA)
+![screenshot step 2 example](https://drive.google.com/open?id=1-734_e9srlO5-oLEwthM3yK2W9c76goO)
