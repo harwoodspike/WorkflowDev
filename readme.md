@@ -27,3 +27,9 @@
 - http://localhost:8000/api/ - api main url
 - http://localhost:8080/ - the webpack dev server
 - http://localhost:8000/workflow/1/ - demo of system we need redone in VueJS
+
+
+# Project Details
+In this project we are merely trying to convert our current workflow system into vuejs.
+We would like the new system to look like the current but instead of being integrated into django we
+will use the new apis I have created in this project to populate the vusjs interface.
