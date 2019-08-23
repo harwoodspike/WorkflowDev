@@ -28,7 +28,7 @@
 - http://localhost:8000/api/ - api main url
 - http://localhost:8080/ - the webpack dev server
 - http://localhost:8000/workflow/1/ - demo of system we need redone in VueJS
-- http://localhost:8000/django-admin/ - control panel for django (can be use to add/remove workflows)
+- http://localhost:8000/admin/ - control panel for django (can be use to add/remove workflows)
 
 
 # Project Details
